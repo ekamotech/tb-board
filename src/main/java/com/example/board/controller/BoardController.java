@@ -62,7 +62,7 @@ public class BoardController {
      * @return 一覧を設定したモデル
      */
     private Model setList(Model model) {
-        List<Post> list = repository.findAllByOrderByUpdatedDateDesc();
+        List<Post> list = repository.findByDeletedFalseOrderByUpdatedDateDesc();
         model.addAttribute("list", list);
         return model;
     }

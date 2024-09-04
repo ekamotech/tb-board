@@ -19,4 +19,10 @@ public interface PostRepository extends JpaRepository<Post, String> {
      */
     List<Post> findAllByOrderByUpdatedDateDesc();
     
+    /**
+     * 更新日時の降順で未削除の投稿を検索する
+     * @return 投稿のリスト
+     */
+    List<Post> findByDeletedFalseOrderByUpdatedDateDesc();
+    
 }

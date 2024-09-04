@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.board.entity.Post;
 import com.example.board.factory.PostFactory;
 import com.example.board.repository.PostRepository;
+import com.example.board.validation.GroupOrder;
 
 /**
  * 掲示板のフロントコントローラー
@@ -45,7 +46,7 @@ public class BoardController {
      * @return テンプレート
      */
     @PostMapping("/create")
-    public String create(@ModelAttribute("form") @Validated Post form, BindingResult result, Model model) {
+    public String create(@ModelAttribute("form") @Validated(GroupOrder.class) Post form, BindingResult result, Model model) {
         if(result.hasErrors()) {
             model = this.setList(model);
             model.addAttribute("path", "create");
@@ -89,7 +90,7 @@ public class BoardController {
      * @return テンプレート
      */
     @PostMapping("/update")
-    public String update(@ModelAttribute("form") @Validated Post form, BindingResult result, Model model) {
+    public String update(@ModelAttribute("form") @Validated(GroupOrder.class) Post form, BindingResult result, Model model) {
         Optional<Post> post = repository.findById(form.getId());
         if(result.hasErrors()) {
             model.addAttribute("form", form);
